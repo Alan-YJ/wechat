@@ -1,0 +1,28 @@
+<template>
+	<image :src='src' mode="widthFix" :class='type' :style="style">
+	</image>
+</template>
+
+<script>
+	export default {
+		props: {
+			src: String,
+			size: {
+				type: [String, Number],
+				default: 90
+			},
+			type: {
+				type: String,
+				default: "rounded"
+			}
+		},
+		computed: {
+			style() {
+				return `width:${this.size}rpx;height${this.size}rpx;`
+			}
+		}
+	}
+</script>
+
+<style>
+</style>

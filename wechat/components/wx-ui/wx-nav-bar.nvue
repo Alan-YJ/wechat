@@ -1,0 +1,66 @@
+<template>
+	<!-- 导航栏 -->
+	<view>
+		<!-- 状态栏 -->
+		<view :class="{'bg-light' :true, 'fixed-top' :fixed }">
+			<view :style='`height:${statusBarHeight}px`'></view>
+			<!-- 导航 -->
+			<view class="w-100 flex align-center justify-between border position-relative" style="height:90rpx;">
+				<view class="position-absolute top-0 left-0 w-100" style="height: 90rpx; line-height: 90rpx;">
+					<view class="align-center justify-center" style="height: 90rpx;">
+						<slot name='title'></slot>
+					</view>
+				</view>
+				<view class="position-absolute top-0 left-0 w-100 flex justify-between " style="height: 90rpx;">
+					<view>
+						<view style='width: 90rpx; height: 90rpx;' class="align-center justify-center">
+							<slot name='left-icons'></slot>
+						</view>
+					</view>
+					<view class='flex'>
+						<slot name='right-icons'></slot>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 占位 -->
+		<view v-if='fixed' :style='`height:${fixedHeight}px`' />
+	</view>
+</template>
+
+<script>
+	import WxIconButton from './wx-icon-button.nvue'
+	export default {
+		porps: {
+			fixed: {
+				type: Boolean,
+				defalut: true
+			}
+		},
+		components: {
+			'wx-icon-button': WxIconButton
+		},
+		data() {
+			return {
+				statusBarHeight: 0,
+			}
+		},
+		computed: {
+			fixedHeight() {
+				return this.statusBarHeight + uni.upx2px(90)
+			}
+		},
+		mounted() {
+			// #ifdef APP-NVUE
+			this.statusBarHeight = plus.navigator.getStatusbarHeight();
+			// #endif
+		},
+		methods: {
+
+		}
+	}
+</script>
+
+<style>
+
+</style>

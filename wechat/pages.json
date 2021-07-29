@@ -1,0 +1,75 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "微信"
+			}
+		},
+		{
+			"path": "pages/addressbook/index",
+			"style": {
+				"navigationBarTitleText": "通讯录"
+			}
+		},
+		{
+			"path": "pages/found/index",
+			"style": {
+				"navigationBarTitleText": "发现"
+			}
+		},
+		{
+			"path": "pages/mine/index"
+		}
+	    ,{
+            "path" : "components/wx-ui/wx-nav-bar/wx-nav-bar",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "微信",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"titleNView": false,	//取消原生导航
+			"scrollIndicator": "none"
+		}
+	},
+	"tabBar": {
+		"borderStyle": "black",
+		"backgroundColor": "#F7F7F7",
+		"color": "#000",
+		"selectedColor": "#08C060",
+		"list": [{
+				"iconPath": "static/tabbar/comment_unselect.png",
+				"selectedIconPath": "static/tabbar/comment.png",
+				"text": "微信",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"iconPath": "static/tabbar/addressbook_unselect.png",
+				"selectedIconPath": "static/tabbar/addressbook.png",
+				"text": "通讯录",
+				"pagePath": "pages/addressbook/index"
+			},
+			{
+				"iconPath": "static/tabbar/found_unselect.png",
+				"selectedIconPath": "static/tabbar/found.png",
+				"text": "发现",
+				"pagePath": "pages/found/index"
+			},
+			{
+				"iconPath": "static/tabbar/mine_unselect.png",
+				"selectedIconPath": "static/tabbar/mine.png",
+				"text": "我",
+				"pagePath": "pages/mine/index"
+			}
+		]
+	}
+}

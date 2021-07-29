@@ -1,0 +1,94 @@
+<template>
+	<view class="page">
+		<wx-nav-bar :fixed='false'>
+			<template slot="title">
+				<text>微信</text>
+				<text v-if='unReadCount>0'>({{unReadCount}})</text>
+			</template>
+			<template slot='left-icons'>
+				<wx-icon-button @click='handleOpenLeftMenu'><text class='iconfont font-md'>&#xe6da;</text>
+				</wx-icon-button>
+			</template>
+			<template slot='right-icons'>
+				<wx-icon-button @click="handleSearch"><text class='iconfont font-md'>&#xe609;</text>
+				</wx-icon-button>
+				<wx-icon-button @click='handleOpenExtra'><text class='iconfont font-md'>&#xe618;</text></wx-icon-button>
+			</template>
+		</wx-nav-bar>
+		<!-- 列表 -->
+		<view>
+			<view class='flex align-center' v-for='item in list' :key='item.id'>
+				<view class='flex align-center justify-center mb-1' style="width: 145rpx;">
+					<wx-avatar :size='92' :src="item.avatar"></wx-avatar>
+				</view>
+				<view class='flex flex-column border-bottom flex-1 py-3 pr-3 border-light-secondary'>
+					<view class='flex align-center justify-between'>
+						<text class='font-md'>{{item.nickName}}</text>
+						<text class='font-sm text-light-muted'>{{item.time|formatTime}}</text>
+					</view>
+					<text class='font-sm text-ellipsis text-light-muted'>{{item.lastMsg}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import wxNavBar from '../../components/wx-ui/wx-nav-bar'
+	import wxIconButton from '../../components/wx-ui/wx-icon-button'
+	import wxAvatar from '../../components/wx-ui/wx-avatar.nvue'
+	import $Time from '@/utils/time.js'
+	export default {
+		components: {
+			wxNavBar,
+			wxIconButton,
+			wxAvatar
+		},
+		data() {
+			return {
+				unReadCount: 0,
+				list: [{
+						id: 1,
+						avatar: '../../static/images/1.jpg',
+						nickName: 'Name test',
+						time: 1627545517655,
+						lastMsg: "this is last message content"
+					},
+					{
+						id: 2,
+						avatar: '../../static/images/2.jpg',
+						nickName: 'Name test223',
+						time: 1627543517655,
+						lastMsg: "this is last message content!this is last message content!this is last message content!"
+					},
+					{
+						id: 3,
+						avatar: '../../static/images/3.jpg',
+						nickName: 'Name test',
+						time: 1627545517655,
+						lastMsg: "this is last message content"
+					},
+				]
+			}
+		},
+		filters: {
+			formatTime(value) {
+				return $Time.gettime(value)
+			}
+		},
+		methods: {
+			handleSearch() {
+				console.info('click search')
+			},
+			handleOpenExtra() {
+				console.info('click open extra menu')
+			},
+			handleOpenLeftMenu() {
+				console.info('click open left menu')
+			},
+		}
+	}
+</script>
+
+<style>
+</style>

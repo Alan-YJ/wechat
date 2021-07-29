@@ -1,0 +1,11 @@
+<template>
+	<view style='width: 90rpx; height: 90rpx;' class="flex align-center justify-center" hover-class="bg-hover-light" @click="$emit('click')">
+		<slot></slot>
+	</view>
+</template>
+
+<script>
+</script>
+
+<style>
+</style>
