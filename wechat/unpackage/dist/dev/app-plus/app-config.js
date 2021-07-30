@@ -91,7 +91,7 @@
   !*** D:/MyProjects/wechat/wechat/pages.json ***!
   \**********************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 
 if (typeof Promise !== 'undefined' && !Promise.prototype.finally) {
@@ -113,7 +113,6 @@ if(uni.restoreGlobal){
 
 
 
-__definePage('components/wx-ui/wx-nav-bar/wx-nav-bar',function(){return Vue.extend(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'components/wx-ui/wx-nav-bar/wx-nav-bar.vue?mpType=page'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())).default)})
 
 
 /***/ })

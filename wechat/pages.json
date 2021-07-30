@@ -21,15 +21,6 @@
 		{
 			"path": "pages/mine/index"
 		}
-	    ,{
-            "path" : "components/wx-ui/wx-nav-bar/wx-nav-bar",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -2587,7 +2587,7 @@ module.exports = {
   ".text-white": {
     "": {
       "color": [
-        "#ffffff",
+        "#FFFFFF",
         0,
         0,
         182

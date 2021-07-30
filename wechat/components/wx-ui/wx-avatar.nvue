@@ -1,6 +1,5 @@
 <template>
-	<image :src='src' mode="widthFix" :class='type' :style="style">
-	</image>
+	<image :src='src' mode="widthFix" :class='type' :style="style" />
 </template>
 
 <script>

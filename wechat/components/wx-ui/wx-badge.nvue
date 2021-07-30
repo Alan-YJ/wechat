@@ -1,0 +1,31 @@
+<template>
+	<view v-if='Number(value) > 0' class='wx-badge bg-danger text-white rounded-circle font-sm' :class="badgeClass" :style="style">{{value}}</view>
+</template>
+
+<script>
+	export default {
+		props: {
+			badgeClass:{
+				type:String,
+				default:''
+			},
+			style:{
+				type:String,
+				default:''
+			},
+			value:{
+				type:[String, Number],
+				default:0
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.wx-badge {
+		padding-left: 14rpx;
+		padding-right: 14rpx;
+		padding-bottom: 6rpx;
+		padding-top: 6rpx;
+	}
+</style>
