@@ -57,7 +57,10 @@ class _IndexPageState extends State<IndexPage> {
                 ],
               )),
               title: Text('User1'),
-              subtitle: Text('最后一条消息'),
+              subtitle: Text(
+                '最后一条消息最后一条消息最后一条消息最后一条消息最后一条消息最后一条消息最后一条消息',
+                overflow: TextOverflow.ellipsis,
+              ),
               trailing: Container(
                 height: double.maxFinite,
                 child: Text(
