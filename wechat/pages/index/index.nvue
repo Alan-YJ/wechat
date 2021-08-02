@@ -12,15 +12,39 @@
 				<wx-icon-button @click="handleSearch">
 					<text class='iconfont font-md'>&#xe609;</text>
 				</wx-icon-button>
-				<wx-icon-button @click='handleOpenExtra'><text class='iconfont font-md'>&#xe618;</text></wx-icon-button>
+				<wx-icon-button @click='handleOpenExtra'>
+					<text class='iconfont font-md'>&#xe658;</text>
+				</wx-icon-button>
 			</template>
 		</wx-nav-bar>
 		<!-- 列表 -->
 		<view>
 			<view v-for='item in list' :key='item.id'>
-				<wx-list-item :item='item' />
+				<wx-list-item :item='item' @showListItemMenu='showListItemMenu' />
 			</view>
 		</view>
+		<!-- list item弹出层 -->
+		<wx-popup ref='listItemPopup' maskColor bodyHeight="200" bodyWidth="240">
+			<view class='flex flex-column' style='width:240rpx; height:200rpx;'>
+				<view class="flex-1 flex align-center" hover-class="bg-light">
+					<text class='font-md pl-3'>取消置顶</text>
+				</view>
+				<view class="flex-1 flex align-center" hover-class="bg-light">
+					<text class='font-md pl-3'>删除该聊天</text>
+				</view>
+			</view>
+		</wx-popup>
+		<!-- 扩展弹出层 -->
+		<wx-popup ref='extraPopup' maskColor bodyHeight="200" bodyWidth="200">
+			<dl>
+				<dt>
+					<text class='iconfont font-md'>&#xe618;</text>
+				</dt>
+				<dd>
+					扫一扫
+				</dd>
+			</dl>
+		</wx-popup>
 	</view>
 </template>
 
@@ -28,11 +52,13 @@
 	import wxNavBar from '@/components/wx-ui/wx-nav-bar.nvue'
 	import wxIconButton from '@/components/wx-ui/wx-icon-button.nvue'
 	import wxListItem from '@/components/wx-ui/wx-list-item.nvue'
+	import wxPopup from '@/components/wx-ui/wx-popup.nvue'
 	export default {
 		components: {
 			wxNavBar,
 			wxIconButton,
-			wxListItem
+			wxListItem,
+			wxPopup
 		},
 		data() {
 			return {
@@ -75,11 +101,14 @@
 				console.info('click search')
 			},
 			handleOpenExtra() {
-				console.info('click open extra menu')
+				this.$refs.extraPopup.show(20, 100)
 			},
 			handleOpenLeftMenu() {
 				console.info('click open left menu')
 			},
+			showListItemMenu(position) {
+				this.$refs.listItemPopup.show(position.x, position.y)
+			}
 		}
 	}
 </script>

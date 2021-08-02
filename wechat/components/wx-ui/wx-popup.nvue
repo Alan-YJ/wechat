@@ -1,0 +1,90 @@
+<template>
+	<!-- 弹出层 -->
+	<div ref='popup' style='z-index:9999;overflow:hidden;' v-if='visible'>
+		<!-- 蒙版 -->
+		<div v-if='hasMask' class="position-fixed top-0 left-0 right-0 bottom-0" :style="getMaskColor" @click="hide">
+		</div>
+		<!-- 内容 -->
+		<div class="position-fixed bg-white" :class='getBodyClass' :style="getBodyStyle">
+			<slot></slot>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props: {
+			maskColor: {
+				type: Boolean,
+				default: false
+			},
+			hasMask: {
+				type: Boolean,
+				default: true
+			},
+			fixedBottom: {
+				type: Boolean,
+				default: false
+			},
+			bodyWidth: {
+				type: Number,
+				default: 0
+			},
+			bodyHeight: {
+				type: Number,
+				default: 0
+			}
+		},
+		data() {
+			return {
+				visible: false,
+				x: -1,
+				y: -1,
+				maxX: 0,
+				maxY: 0
+			}
+		},
+		computed: {
+			getMaskColor() {
+				let opacity = this.maskColor ? 0.5 : 0
+				return `background-color: rbga(0,0,0,${opacity})`
+			},
+			getBodyClass() {
+				let position = this.fixedBottom ? 'left-0 right-0 bottom-0' : 'rounded border'
+				return position
+			},
+			getBodyStyle() {
+				let left = this.x > -1 ? `left:${this.x}px;` : ''
+				let top = this.y > -1 ? `top:${this.y}px;` : ''
+				return left + top;
+			}
+		},
+		mounted() {
+			try {
+				// 获取设备最大宽高可用信息
+				const res = uni.getSystemInfoSync();
+				this.maxX = res.windowWidth - uni.upx2px(this.bodyWidth)
+				this.maxY = res.windowHeight - uni.upx2px(this.bodyHeight)
+			} catch {
+
+			}
+		},
+		methods: {
+			show(x = -1, y = -1) {
+				console.info(x, y, this.maxX, this.maxY)
+				this.x = (x > this.maxX) ? this.maxX : x
+				this.y = (y > this.maxY) ? this.maxY : y
+				this.visible = true
+			},
+			hide() {
+				this.visible = false
+			},
+			toggle() {
+				this.visible = !this.visible;
+			}
+		}
+	}
+</script>
+
+<style>
+</style>
