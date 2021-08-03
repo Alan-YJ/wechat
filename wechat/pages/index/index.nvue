@@ -24,9 +24,9 @@
 			</view>
 		</view>
 		<!-- list item弹出层 -->
-		<wx-popup ref='listItemPopup' maskColor bodyHeight="200" bodyWidth="240">
+		<wx-popup ref='listItemPopup' bodyHeight="200" bodyWidth="240">
 			<view class='flex flex-column' style='width:240rpx; height:200rpx;'>
-				<view class="flex-1 flex align-center" hover-class="bg-light">
+				<view class="flex-1 flex align-center text-white" hover-class="bg-light">
 					<text class='font-md pl-3'>取消置顶</text>
 				</view>
 				<view class="flex-1 flex align-center" hover-class="bg-light">
@@ -35,15 +35,13 @@
 			</view>
 		</wx-popup>
 		<!-- 扩展弹出层 -->
-		<wx-popup ref='extraPopup' maskColor bodyHeight="200" bodyWidth="200">
-			<dl>
-				<dt>
-					<text class='iconfont font-md'>&#xe618;</text>
-				</dt>
-				<dd>
-					扫一扫
-				</dd>
-			</dl>
+		<wx-popup ref='extraPopup' bodyHeight="525" bodyWidth="320" bodyBgColor='bg-dark' transformPosition='right top'>
+			<view class='flex flex-column' style='width:320rpx; height:525rpx;'>
+				<view class="flex-1 flex align-center pl-3" hover-class="bg-hover-dark" v-for='option in extraOptions' :key='option.type'>
+					<text class='iconfont font-md text-white'>{{option.icon}}</text>
+					<text class='font-md pl-2 text-white'>{{option.label}}</text>
+				</view>
+			</view>
 		</wx-popup>
 	</view>
 </template>
@@ -80,11 +78,38 @@
 					},
 					{
 						id: 3,
-						avatar: '../../static/images/3.jpg',
+						avatar: '../../static/images/4.jpg',
 						nickName: 'Name test',
 						time: 1627545517655,
 						lastMsg: "this is last message content",
 						unReadCount: 2
+					},
+				],
+				extraOptions:[
+					{
+						icon:"\ue61d",
+						label:"发起群聊",
+						type:"group"
+					},
+					{
+						icon:"\ue6ce",
+						label:"添加朋友",
+						type:"friend"
+					},
+					{
+						icon:"\ue618",
+						label:"扫一扫",
+						type:"scan"
+					},
+					{
+						icon:"\ue620",
+						label:"收付款",
+						type:"payment"
+					},
+					{
+						icon:"\ue633",
+						label:"帮助反馈",
+						type:"help"
 					},
 				]
 			}
@@ -101,10 +126,10 @@
 				console.info('click search')
 			},
 			handleOpenExtra() {
-				this.$refs.extraPopup.show(20, 100)
+				this.$refs.extraPopup.show(550, 90)
 			},
 			handleOpenLeftMenu() {
-				console.info('click open left menu')
+				this.$refs.extraPopup.show(20, 100)
 			},
 			showListItemMenu(position) {
 				this.$refs.listItemPopup.show(position.x, position.y)

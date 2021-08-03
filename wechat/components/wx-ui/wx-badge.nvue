@@ -1,5 +1,7 @@
 <template>
-	<view v-if='Number(value) > 0' class='wx-badge bg-danger text-white rounded-circle font-sm' :class="badgeClass" :style="style">{{value}}</view>
+	<view v-if='Number(value) > 0' class='wx-badge bg-danger rounded-circle ' :class="badgeClass" :style="style">
+		<text class="text-white font-sm">{{value}}</text>
+	</view>
 </template>
 
 <script>

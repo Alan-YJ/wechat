@@ -5,13 +5,15 @@
 		<div v-if='hasMask' class="position-fixed top-0 left-0 right-0 bottom-0" :style="getMaskColor" @click="hide">
 		</div>
 		<!-- 内容 -->
-		<div class="position-fixed bg-white" :class='getBodyClass' :style="getBodyStyle">
+		<div ref='popupContent' class="popup-content position-fixed" :class='getBodyClass'
+			:style="getBodyStyle">
 			<slot></slot>
 		</div>
 	</div>
 </template>
 
 <script>
+	const animation = weex.requireModule('animation')
 	export default {
 		props: {
 			maskColor: {
@@ -33,6 +35,14 @@
 			bodyHeight: {
 				type: Number,
 				default: 0
+			},
+			bodyBgColor:{
+				type:String,
+				default:"bg-white"
+			},
+			transformPosition:{
+				type:String,
+				default:"left top"
 			}
 		},
 		data() {
@@ -47,11 +57,11 @@
 		computed: {
 			getMaskColor() {
 				let opacity = this.maskColor ? 0.5 : 0
-				return `background-color: rbga(0,0,0,${opacity})`
+				return `background-color: rgba(0,0,0,${opacity})`
 			},
 			getBodyClass() {
 				let position = this.fixedBottom ? 'left-0 right-0 bottom-0' : 'rounded border'
-				return position
+				return `${this.bodyBgColor} ${position}`
 			},
 			getBodyStyle() {
 				let left = this.x > -1 ? `left:${this.x}px;` : ''
@@ -75,9 +85,37 @@
 				this.x = (x > this.maxX) ? this.maxX : x
 				this.y = (y > this.maxY) ? this.maxY : y
 				this.visible = true
+				// #ifdef APP-NVUE
+				this.$nextTick(() => {
+					animation.transition(this.$refs.popupContent, {
+						styles: {
+							transform: 'scale(1, 1)',
+							transformOrigin: this.transformPosition,
+							opacity: 1
+						},
+						duration: 120, //ms
+					}, function() {
+						console.info('animation is success')
+					})
+				})
+				// #endif
 			},
 			hide() {
+				// #ifdef APP-NVUE
+				animation.transition(this.$refs.popupContent, {
+					styles: {
+						transform: 'scale(0, 0)',
+						transformOrigin: this.transformPosition,
+						opacity: '0.3'
+					},
+					duration: 120, //ms
+				}, () => {
+					this.visible = false
+				})
+				// #endif
+				// #ifndef APP-NVUE
 				this.visible = false
+				// #endif
 			},
 			toggle() {
 				this.visible = !this.visible;
@@ -87,4 +125,8 @@
 </script>
 
 <style>
+	.popup-content {
+		transform: scale(0, 0);
+		opacity: 0;
+	}
 </style>

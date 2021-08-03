@@ -3,7 +3,7 @@
 		<div class='flex align-stretch' @click="handleClick" @longpress="handleLoingPress">
 			<view class='flex align-center justify-center mb-1' style="width: 145rpx;">
 				<wx-avatar :size='92' :src="item.avatar"></wx-avatar>
-				<wxBadge class='position-absolute' style="right: 15rpx; top:15rpx;" :value="item.unReadCount" />
+				<wxBadge class='position-absolute' style="right: 18rpx; top:7rpx;" :value="item.unReadCount" />
 			</view>
 			<view class='flex flex-column border-bottom flex-1 py-3 pr-3 border-light-secondary'>
 				<view class='flex align-center justify-between'>
